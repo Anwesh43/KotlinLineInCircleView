@@ -53,8 +53,9 @@ class LineInCircleView (ctx : Context) : View(ctx) {
 
         fun animate (updatecb : () -> Unit) {
             if (animated) {
+                updatecb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(75)
                     view.invalidate()
                 }
                 catch (ex : Exception) {
