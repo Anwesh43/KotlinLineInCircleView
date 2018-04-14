@@ -110,4 +110,26 @@ class LineInCircleView (ctx : Context) : View(ctx) {
             state.startUpdating(startcb)
         }
     }
+
+    data class Renderer (var view : LineInCircleView) {
+
+        private val animator : Animator = Animator(view)
+
+        private final val lineInCircle = LineInCircle(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#212121"))
+            lineInCircle.draw(canvas, paint)
+            animator.animate {
+                lineInCircle.update {
+                    animator.stop()
+                }
+            }
+        }
+        fun handleTap() {
+            lineInCircle.startUpdating {
+                animator.stop()
+            }
+        }
+    }
 }
