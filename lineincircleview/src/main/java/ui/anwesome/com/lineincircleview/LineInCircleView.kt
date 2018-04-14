@@ -4,6 +4,7 @@ package ui.anwesome.com.lineincircleview
  * Created by anweshmishra on 14/04/18.
  */
 
+import android.app.Activity
 import android.content.*
 import android.graphics.*
 import android.view.MotionEvent
@@ -130,6 +131,14 @@ class LineInCircleView (ctx : Context) : View(ctx) {
             lineInCircle.startUpdating {
                 animator.stop()
             }
+        }
+    }
+
+    companion object {
+        fun create (activity : Activity) : LineInCircleView {
+            val view : LineInCircleView = LineInCircleView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
