@@ -80,6 +80,7 @@ class LineInCircleView (ctx : Context) : View(ctx) {
 
     data class LineInCircle (var i : Int, private val state : State = State()) {
         fun draw(canvas : Canvas, paint : Paint) {
+            paint.strokeCap = Paint.Cap.ROUND
             paint.color = Color.WHITE
             val w : Float = canvas.width.toFloat()
             val h : Float = canvas.height.toFloat()
@@ -103,6 +104,8 @@ class LineInCircleView (ctx : Context) : View(ctx) {
                 }
             }
             canvas.drawPath(path, paint)
+            val lx : Float = w/3 * Math.sin(updated_deg * Math.PI/180).toFloat()
+            canvas.drawLine(-lx, 1.4f *r, lx, 1.4f *r, paint)
             canvas.restore()
         }
 
@@ -119,7 +122,7 @@ class LineInCircleView (ctx : Context) : View(ctx) {
 
         private val animator : Animator = Animator(view)
 
-        private final val lineInCircle = LineInCircle(0)
+        private val lineInCircle = LineInCircle(0)
 
         fun render(canvas : Canvas, paint : Paint) {
             canvas.drawColor(Color.parseColor("#212121"))
